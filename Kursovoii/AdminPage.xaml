@@ -1,0 +1,144 @@
+﻿<Window x:Class="Kursovoii.AdminPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursovoii"
+        mc:Ignorable="d"
+        Title="Страница админа" Height="700" Width="1000" Icon="/jTx69nkrc.png">
+    <Grid>
+        <Rectangle HorizontalAlignment="Left" Height="1117" Margin="268,-545,0,0" Stroke="White" VerticalAlignment="Top" Width="328" Panel.ZIndex="-2" Fill="#FF5FE8E5" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="71.645"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+
+        <Rectangle Margin="383,102,244,-554" Stroke="White" Panel.ZIndex="-2" Fill="#FF5FE8E5" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="71.645"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <TextBlock HorizontalAlignment="Left" Margin="185,10,0,0" TextWrapping="Wrap" Text="Добро пожаловать в систему!" VerticalAlignment="Top" FontSize="30" FontFamily="Bahnschrift SemiLight" Height="40" Width="434" TextAlignment="Center"/>
+        <TextBlock x:Name="username" HorizontalAlignment="Left" Margin="726,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="21" FontFamily="Bahnschrift SemiLight" Height="40" Width="240" TextAlignment="Right"/>
+
+        <Button x:Name="checkplanebtn" HorizontalAlignment="Left" Margin="10,83,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Background="White" Width="258" Focusable="False" BorderBrush="Black" Height="64" Click="checkplanebtn_Click">
+            <TextBlock TextAlignment="Center">
+        Посмотреть данные <LineBreak/>
+         о самолётах
+            </TextBlock>
+        </Button>
+
+        <Button x:Name="addplanebtn" Content="Добавить самолет" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Background="White" Width="258" Focusable="False" BorderBrush="Black" Height="36" Click="addplanebtn_Click"/>
+
+        <Button x:Name="adduserbtn" Content="Добавить пользователя" HorizontalAlignment="Left" Margin="10,193,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Background="White" Width="258" Focusable="False" BorderBrush="Black" Height="36" Click="adduserbtn_Click"/>
+
+        <Button x:Name="checkuserbtn" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Background="White" Width="258" Focusable="False" BorderBrush="Black" Height="64" Click="checkuserbtn_Click">
+            <TextBlock TextAlignment="Center">
+Посмотреть данные <LineBreak/>
+ о пользователях
+            </TextBlock>
+        </Button>
+
+        <Button x:Name="checkhistorybtn" HorizontalAlignment="Left" Margin="10,303,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Background="White" Width="258" Focusable="False" BorderBrush="Black" Height="64" Click="checkhistorybtn_Click">
+            <TextBlock TextAlignment="Center">
+Посмотреть историю <LineBreak/>
+посещения пользователей
+            </TextBlock>
+        </Button>
+
+        <Button x:Name="changestat" HorizontalAlignment="Left" Margin="10,372,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Background="White" Width="258" Focusable="False" BorderBrush="Black" Height="39" Click="changestat_Click">
+            <TextBlock TextAlignment="Center">
+Изменить статус рейса</TextBlock>
+        </Button>
+
+        <Grid x:Name="change" Visibility="Hidden" Margin="273,55,0,10">
+            <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="Изменение статуса рейса" VerticalAlignment="Top" FontFamily="Bahnschrift SemiLight" FontSize="23"/>
+            <ComboBox x:Name="neededfly" HorizontalAlignment="Left" Margin="240,122,0,0" VerticalAlignment="Top" Width="210" FontFamily="Bahnschrift SemiLight" FontSize="23" SelectionChanged="neededfly_SelectionChanged"/>
+            <ComboBox x:Name="newstatus" HorizontalAlignment="Left" Margin="227,333,0,0" VerticalAlignment="Top" Width="210" FontFamily="Bahnschrift SemiLight" FontSize="23"/>
+            <TextBlock HorizontalAlignment="Left" Margin="239,305,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift SemiLight" FontSize="23"><Run Language="ru-ru" Text="Новое состояние:"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="240,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift SemiLight" FontSize="23"><Run Language="ru-ru" Text="Состояние рейса:"/></TextBlock>
+            <TextBlock x:Name="statustext" HorizontalAlignment="Left" Margin="240,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift SemiLight" FontSize="23" Text="" Width="210"/>
+            <TextBlock HorizontalAlignment="Left" Margin="272,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift SemiLight" FontSize="23"><Run Language="ru-ru" Text="Нужный рейс:"/></TextBlock>
+
+            <Button x:Name="savestat" Content="Сохранить статус" HorizontalAlignment="Left" Margin="219,445,0,0" FontFamily="Bahnschrift SemiLight" Background="White" BorderBrush="Black" FontSize="25" Width="226" Height="42" VerticalAlignment="Top" Click="savestat_Click"/>
+
+        </Grid>
+
+        <Grid x:Name="checkplanegrid" Margin="273,55,0,10" Visibility="Hidden">
+            <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="Просмотр самолётов" VerticalAlignment="Top" FontFamily="Bahnschrift SemiLight" FontSize="23"/>
+            <ListBox x:Name="allplanes" Margin="10,60,10,10" FontFamily="Bahnschrift SemiLight" FontSize="16"/>
+        </Grid>
+
+        <Grid x:Name="addplanegrid" Margin="273,55,0,10" Visibility="Hidden">
+            <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="Добавить самолёт" VerticalAlignment="Top" FontFamily="Bahnschrift SemiLight" FontSize="23"/>
+            <TextBlock HorizontalAlignment="Center" Margin="0,104,0,0" TextWrapping="Wrap" Text="Название самолёта" VerticalAlignment="Top" FontSize="22"/>
+            <TextBox x:Name="nameofplane" HorizontalAlignment="Center" Margin="0,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" FontSize="22" FontFamily="Bahnschrift SemiLight"/>
+            <TextBlock HorizontalAlignment="Center" Margin="0,194,0,0" TextWrapping="Wrap" Text="Вместительность людей" VerticalAlignment="Top" FontSize="22"/>
+            <ComboBox x:Name="quantityppl" HorizontalAlignment="Center" Margin="0,228,0,0" VerticalAlignment="Top" Width="241" FontFamily="Bahnschrift SemiLight" FontSize="22" BorderBrush="White">
+                <ComboBox.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="#FFF0F0F0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </ComboBox.Background>
+                <ComboBoxItem Content="80"/>
+                <ComboBoxItem Content="100"/>
+                <ComboBoxItem Content="120"/>
+                <ComboBoxItem Content="140"/>
+                <ComboBoxItem Content="160"/>
+                <ComboBoxItem Content="180"/>
+            </ComboBox>
+            <Button x:Name="addplane" Content="Добавить самолёт" HorizontalAlignment="Center" Margin="0,310,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift SemiLight" FontSize="24" Background="White" BorderBrush="Black" Height="48" Width="257" Click="addplane_Click"/>
+        </Grid>
+
+        <Grid x:Name="addusergrid" Margin="273,55,0,10" Visibility="Hidden">
+            <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="Добавление пользователей" VerticalAlignment="Top" FontFamily="Bahnschrift SemiLight" FontSize="23"/>
+
+
+            <TextBox x:Name="surname" Margin="32,111,481,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" BorderBrush="Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="64,87,0,0" TextWrapping="Wrap" Text="Фамилия" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Height="23" Width="150" TextAlignment="Center"/>
+
+            <TextBox x:Name="name" Margin="256,111,257,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" BorderBrush="Black"/>
+            <TextBlock HorizontalAlignment="Center" Margin="0,87,0,0" TextWrapping="Wrap" Text="Имя" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Height="23" Width="150" TextAlignment="Center"/>
+
+
+            <Button x:Name="createpol" Content="Добавить пользователя" HorizontalAlignment="Left" Margin="229,513,0,0" VerticalAlignment="Top" BorderBrush="Black" Background="White" FontFamily="Bahnschrift SemiLight" FontSize="25" Width="308" Click="createpol_Click"/>
+            <TextBox x:Name="trim" Margin="476,111,37,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" BorderBrush="Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="508,87,0,0" TextWrapping="Wrap" Text="Отчество" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Height="23" Width="150" TextAlignment="Center"/>
+            <TextBox x:Name="email" Margin="256,215,257,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" BorderBrush="Black"/>
+            <TextBlock HorizontalAlignment="Center" Margin="0,191,0,0" TextWrapping="Wrap" Text="Электронная почта" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Height="23" Width="214" TextAlignment="Center"/>
+            <TextBox x:Name="telephone" Margin="32,215,486,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" BorderBrush="Black" MaxLength="11"/>
+            <TextBlock HorizontalAlignment="Left" Margin="32,191,0,0" TextWrapping="Wrap" Text="Номер телефона" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Height="23" Width="214" TextAlignment="Center"/>
+            <TextBox x:Name="loginpas" Margin="133,334,386,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" BorderBrush="Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="166,310,0,0" TextWrapping="Wrap" Text="Логин" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Height="23" Width="150" TextAlignment="Center"/>
+            <TextBox x:Name="passwordpol" Margin="377,334,139,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" BorderBrush="Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="409,310,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Height="23" Width="150" TextAlignment="Center"/>
+
+            <TextBlock HorizontalAlignment="Left" Margin="508,191,0,0" TextWrapping="Wrap" Text="Дата рождения" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Height="23" Width="150" TextAlignment="Center"/>
+            <DatePicker x:Name="datebornpol" HorizontalAlignment="Left" Margin="482,215,0,0" FontFamily="Bahnschrift SemiLight" VerticalAlignment="Top" Width="212" Height="26" DisplayDateEnd="2017-05-05" BorderBrush="Black"/>
+
+        </Grid>
+
+        <Grid x:Name="checkusergrid" Margin="273,55,0,10" Visibility="Hidden">
+            <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="Просмотр пользователей" VerticalAlignment="Top" FontFamily="Bahnschrift SemiLight" FontSize="23"/>
+            <ListBox x:Name="allusers" Margin="10,60,10,10" FontFamily="Bahnschrift SemiLight" FontSize="14"/>
+        </Grid>
+
+        <Grid x:Name="checkhistorygrid" Margin="273,55,0,10" Visibility="Hidden">
+            <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="История посещения пользователей" VerticalAlignment="Top" FontFamily="Bahnschrift SemiLight" FontSize="23"/>
+            <ListBox x:Name="allhistory" Margin="10,60,10,10" FontFamily="Bahnschrift SemiLight" FontSize="21"/>
+        </Grid>
+        <Button x:Name="exitbtn" Content="Выход" HorizontalAlignment="Left" Margin="10,608,0,0" FontFamily="Bahnschrift SemiLight" Background="White" BorderBrush="Black" FontSize="25" Width="119" Click="exitbtn_Click" Height="42" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,599 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище KursoviiModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Данные о пассажирах">
+          <Key>
+            <PropertyRef Name="Код пассажира" />
+          </Key>
+          <Property Name="Код пассажира" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="70" />
+          <Property Name="Имя" Type="varchar" MaxLength="70" />
+          <Property Name="Отчество" Type="varchar" MaxLength="70" />
+          <Property Name="Дата рождения" Type="date" />
+          <Property Name="Код пасспорта" Type="int" />
+        </EntityType>
+        <EntityType Name="Записи на рейс">
+          <Key>
+            <PropertyRef Name="Код записи" />
+          </Key>
+          <Property Name="Код записи" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код рейса" Type="int" />
+          <Property Name="Код пассажира" Type="int" />
+          <Property Name="Дата записи" Type="datetime" />
+        </EntityType>
+        <EntityType Name="История входа">
+          <Key>
+            <PropertyRef Name="Код входа" />
+          </Key>
+          <Property Name="Код входа" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код пользователя" Type="int" />
+          <Property Name="Дата" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Паспорт пассажира">
+          <Key>
+            <PropertyRef Name="Код паспорта" />
+          </Key>
+          <Property Name="Код паспорта" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Серия" Type="varchar" MaxLength="4" />
+          <Property Name="Номер" Type="varchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="Пользователи">
+          <Key>
+            <PropertyRef Name="Код пользователя" />
+          </Key>
+          <Property Name="Код пользователя" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="70" />
+          <Property Name="Имя" Type="varchar" MaxLength="70" />
+          <Property Name="Отчество" Type="varchar" MaxLength="70" />
+          <Property Name="Дата рождения" Type="date" />
+          <Property Name="Номер телефона" Type="varchar" MaxLength="11" />
+          <Property Name="Электронная почта" Type="varchar" MaxLength="70" />
+          <Property Name="Код статуса пользователя" Type="int" />
+          <Property Name="Логин" Type="varchar" MaxLength="50" />
+          <Property Name="Пароль" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Рейс">
+          <Key>
+            <PropertyRef Name="Код рейса" />
+          </Key>
+          <Property Name="Код рейса" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Дата полёта" Type="datetime" />
+          <Property Name="Код самолёта" Type="int" />
+          <Property Name="Город отправки" Type="varchar" MaxLength="50" />
+          <Property Name="Город прибытия" Type="varchar" MaxLength="50" />
+          <Property Name="Код статуса рейса" Type="int" />
+          <Property Name="Код сотрудника" Type="int" />
+        </EntityType>
+        <EntityType Name="Самолёты">
+          <Key>
+            <PropertyRef Name="Код самолёта" />
+          </Key>
+          <Property Name="Код самолёта" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название самолёта" Type="varchar" MaxLength="70" />
+          <Property Name="Вместительность людей" Type="int" />
+        </EntityType>
+        <EntityType Name="Статус пользователя">
+          <Key>
+            <PropertyRef Name="Код статуса пользователя" />
+          </Key>
+          <Property Name="Код статуса пользователя" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Статус рейса">
+          <Key>
+            <PropertyRef Name="Код статуса рейса" />
+          </Key>
+          <Property Name="Код статуса рейса" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Данные о пассажирах_Паспорт пассажира">
+          <End Role="Паспорт пассажира" Type="Self.Паспорт пассажира" Multiplicity="0..1" />
+          <End Role="Данные о пассажирах" Type="Self.Данные о пассажирах" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Паспорт пассажира">
+              <PropertyRef Name="Код паспорта" />
+            </Principal>
+            <Dependent Role="Данные о пассажирах">
+              <PropertyRef Name="Код пасспорта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Записи на рейс_Данные о пассажирах">
+          <End Role="Данные о пассажирах" Type="Self.Данные о пассажирах" Multiplicity="0..1" />
+          <End Role="Записи на рейс" Type="Self.Записи на рейс" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Данные о пассажирах">
+              <PropertyRef Name="Код пассажира" />
+            </Principal>
+            <Dependent Role="Записи на рейс">
+              <PropertyRef Name="Код пассажира" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Записи на рейс_Рейс">
+          <End Role="Рейс" Type="Self.Рейс" Multiplicity="0..1" />
+          <End Role="Записи на рейс" Type="Self.Записи на рейс" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Рейс">
+              <PropertyRef Name="Код рейса" />
+            </Principal>
+            <Dependent Role="Записи на рейс">
+              <PropertyRef Name="Код рейса" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_История входа_Пользователи">
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
+          <End Role="История входа" Type="Self.История входа" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="Код пользователя" />
+            </Principal>
+            <Dependent Role="История входа">
+              <PropertyRef Name="Код пользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Пользователи_Статус пользователя">
+          <End Role="Статус пользователя" Type="Self.Статус пользователя" Multiplicity="0..1" />
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Статус пользователя">
+              <PropertyRef Name="Код статуса пользователя" />
+            </Principal>
+            <Dependent Role="Пользователи">
+              <PropertyRef Name="Код статуса пользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Рейс_Пользователи">
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
+          <End Role="Рейс" Type="Self.Рейс" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="Код пользователя" />
+            </Principal>
+            <Dependent Role="Рейс">
+              <PropertyRef Name="Код сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Рейс_Самолёты">
+          <End Role="Самолёты" Type="Self.Самолёты" Multiplicity="0..1" />
+          <End Role="Рейс" Type="Self.Рейс" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Самолёты">
+              <PropertyRef Name="Код самолёта" />
+            </Principal>
+            <Dependent Role="Рейс">
+              <PropertyRef Name="Код самолёта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Рейс_Статус рейса">
+          <End Role="Статус рейса" Type="Self.Статус рейса" Multiplicity="0..1" />
+          <End Role="Рейс" Type="Self.Рейс" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Статус рейса">
+              <PropertyRef Name="Код статуса рейса" />
+            </Principal>
+            <Dependent Role="Рейс">
+              <PropertyRef Name="Код статуса рейса" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище KursoviiModelContainer">
+          <EntitySet Name="Данные о пассажирах" EntityType="Self.Данные о пассажирах" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Записи на рейс" EntityType="Self.Записи на рейс" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="История входа" EntityType="Self.История входа" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Паспорт пассажира" EntityType="Self.Паспорт пассажира" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Пользователи" EntityType="Self.Пользователи" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Рейс" EntityType="Self.Рейс" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Самолёты" EntityType="Self.Самолёты" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Статус пользователя" EntityType="Self.Статус пользователя" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Статус рейса" EntityType="Self.Статус рейса" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Данные о пассажирах_Паспорт пассажира" Association="Self.FK_Данные о пассажирах_Паспорт пассажира">
+            <End Role="Паспорт пассажира" EntitySet="Паспорт пассажира" />
+            <End Role="Данные о пассажирах" EntitySet="Данные о пассажирах" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Записи на рейс_Данные о пассажирах" Association="Self.FK_Записи на рейс_Данные о пассажирах">
+            <End Role="Данные о пассажирах" EntitySet="Данные о пассажирах" />
+            <End Role="Записи на рейс" EntitySet="Записи на рейс" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Записи на рейс_Рейс" Association="Self.FK_Записи на рейс_Рейс">
+            <End Role="Рейс" EntitySet="Рейс" />
+            <End Role="Записи на рейс" EntitySet="Записи на рейс" />
+          </AssociationSet>
+          <AssociationSet Name="FK_История входа_Пользователи" Association="Self.FK_История входа_Пользователи">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="История входа" EntitySet="История входа" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Пользователи_Статус пользователя" Association="Self.FK_Пользователи_Статус пользователя">
+            <End Role="Статус пользователя" EntitySet="Статус пользователя" />
+            <End Role="Пользователи" EntitySet="Пользователи" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Рейс_Пользователи" Association="Self.FK_Рейс_Пользователи">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="Рейс" EntitySet="Рейс" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Рейс_Самолёты" Association="Self.FK_Рейс_Самолёты">
+            <End Role="Самолёты" EntitySet="Самолёты" />
+            <End Role="Рейс" EntitySet="Рейс" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Рейс_Статус рейса" Association="Self.FK_Рейс_Статус рейса">
+            <End Role="Статус рейса" EntitySet="Статус рейса" />
+            <End Role="Рейс" EntitySet="Рейс" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KursoviiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="KursoviiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Данные_о_пассажирах" EntityType="KursoviiModel.Данные_о_пассажирах" />
+          <EntitySet Name="Записи_на_рейс" EntityType="KursoviiModel.Записи_на_рейс" />
+          <EntitySet Name="История_входа" EntityType="KursoviiModel.История_входа" />
+          <EntitySet Name="Паспорт_пассажира" EntityType="KursoviiModel.Паспорт_пассажира" />
+          <EntitySet Name="Пользователи" EntityType="KursoviiModel.Пользователи" />
+          <EntitySet Name="Рейс" EntityType="KursoviiModel.Рейс" />
+          <EntitySet Name="Самолёты" EntityType="KursoviiModel.Самолёты" />
+          <EntitySet Name="Статус_пользователя" EntityType="KursoviiModel.Статус_пользователя" />
+          <EntitySet Name="Статус_рейса" EntityType="KursoviiModel.Статус_рейса" />
+          <AssociationSet Name="FK_Данные_о_пассажирах_Паспорт_пассажира" Association="KursoviiModel.FK_Данные_о_пассажирах_Паспорт_пассажира">
+            <End Role="Паспорт_пассажира" EntitySet="Паспорт_пассажира" />
+            <End Role="Данные_о_пассажирах" EntitySet="Данные_о_пассажирах" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Записи_на_рейс_Данные_о_пассажирах" Association="KursoviiModel.FK_Записи_на_рейс_Данные_о_пассажирах">
+            <End Role="Данные_о_пассажирах" EntitySet="Данные_о_пассажирах" />
+            <End Role="Записи_на_рейс" EntitySet="Записи_на_рейс" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Записи_на_рейс_Рейс" Association="KursoviiModel.FK_Записи_на_рейс_Рейс">
+            <End Role="Рейс" EntitySet="Рейс" />
+            <End Role="Записи_на_рейс" EntitySet="Записи_на_рейс" />
+          </AssociationSet>
+          <AssociationSet Name="FK_История_входа_Пользователи" Association="KursoviiModel.FK_История_входа_Пользователи">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="История_входа" EntitySet="История_входа" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Пользователи_Статус_пользователя" Association="KursoviiModel.FK_Пользователи_Статус_пользователя">
+            <End Role="Статус_пользователя" EntitySet="Статус_пользователя" />
+            <End Role="Пользователи" EntitySet="Пользователи" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Рейс_Пользователи" Association="KursoviiModel.FK_Рейс_Пользователи">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="Рейс" EntitySet="Рейс" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Рейс_Самолёты" Association="KursoviiModel.FK_Рейс_Самолёты">
+            <End Role="Самолёты" EntitySet="Самолёты" />
+            <End Role="Рейс" EntitySet="Рейс" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Рейс_Статус_рейса" Association="KursoviiModel.FK_Рейс_Статус_рейса">
+            <End Role="Статус_рейса" EntitySet="Статус_рейса" />
+            <End Role="Рейс" EntitySet="Рейс" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Данные_о_пассажирах">
+          <Key>
+            <PropertyRef Name="Код_пассажира" />
+          </Key>
+          <Property Name="Код_пассажира" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Фамилия" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Имя" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Отчество" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Дата_рождения" Type="DateTime" Precision="0" />
+          <Property Name="Код_пасспорта" Type="Int32" />
+          <NavigationProperty Name="Паспорт_пассажира" Relationship="KursoviiModel.FK_Данные_о_пассажирах_Паспорт_пассажира" FromRole="Данные_о_пассажирах" ToRole="Паспорт_пассажира" />
+          <NavigationProperty Name="Записи_на_рейс" Relationship="KursoviiModel.FK_Записи_на_рейс_Данные_о_пассажирах" FromRole="Данные_о_пассажирах" ToRole="Записи_на_рейс" />
+        </EntityType>
+        <EntityType Name="Записи_на_рейс">
+          <Key>
+            <PropertyRef Name="Код_записи" />
+          </Key>
+          <Property Name="Код_записи" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Код_рейса" Type="Int32" />
+          <Property Name="Код_пассажира" Type="Int32" />
+          <Property Name="Дата_записи" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Данные_о_пассажирах" Relationship="KursoviiModel.FK_Записи_на_рейс_Данные_о_пассажирах" FromRole="Записи_на_рейс" ToRole="Данные_о_пассажирах" />
+          <NavigationProperty Name="Рейс" Relationship="KursoviiModel.FK_Записи_на_рейс_Рейс" FromRole="Записи_на_рейс" ToRole="Рейс" />
+        </EntityType>
+        <EntityType Name="История_входа">
+          <Key>
+            <PropertyRef Name="Код_входа" />
+          </Key>
+          <Property Name="Код_входа" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Код_пользователя" Type="Int32" />
+          <Property Name="Дата" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Пользователи" Relationship="KursoviiModel.FK_История_входа_Пользователи" FromRole="История_входа" ToRole="Пользователи" />
+        </EntityType>
+        <EntityType Name="Паспорт_пассажира">
+          <Key>
+            <PropertyRef Name="Код_паспорта" />
+          </Key>
+          <Property Name="Код_паспорта" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Серия" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Номер" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Данные_о_пассажирах" Relationship="KursoviiModel.FK_Данные_о_пассажирах_Паспорт_пассажира" FromRole="Паспорт_пассажира" ToRole="Данные_о_пассажирах" />
+        </EntityType>
+        <EntityType Name="Пользователи">
+          <Key>
+            <PropertyRef Name="Код_пользователя" />
+          </Key>
+          <Property Name="Код_пользователя" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Фамилия" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Имя" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Отчество" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Дата_рождения" Type="DateTime" Precision="0" />
+          <Property Name="Номер_телефона" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Электронная_почта" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Код_статуса_пользователя" Type="Int32" />
+          <Property Name="Логин" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Пароль" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="История_входа" Relationship="KursoviiModel.FK_История_входа_Пользователи" FromRole="Пользователи" ToRole="История_входа" />
+          <NavigationProperty Name="Статус_пользователя" Relationship="KursoviiModel.FK_Пользователи_Статус_пользователя" FromRole="Пользователи" ToRole="Статус_пользователя" />
+          <NavigationProperty Name="Рейс" Relationship="KursoviiModel.FK_Рейс_Пользователи" FromRole="Пользователи" ToRole="Рейс" />
+        </EntityType>
+        <EntityType Name="Рейс">
+          <Key>
+            <PropertyRef Name="Код_рейса" />
+          </Key>
+          <Property Name="Код_рейса" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Дата_полёта" Type="DateTime" Precision="3" />
+          <Property Name="Код_самолёта" Type="Int32" />
+          <Property Name="Город_отправки" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Город_прибытия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Код_статуса_рейса" Type="Int32" />
+          <Property Name="Код_сотрудника" Type="Int32" />
+          <NavigationProperty Name="Записи_на_рейс" Relationship="KursoviiModel.FK_Записи_на_рейс_Рейс" FromRole="Рейс" ToRole="Записи_на_рейс" />
+          <NavigationProperty Name="Пользователи" Relationship="KursoviiModel.FK_Рейс_Пользователи" FromRole="Рейс" ToRole="Пользователи" />
+          <NavigationProperty Name="Самолёты" Relationship="KursoviiModel.FK_Рейс_Самолёты" FromRole="Рейс" ToRole="Самолёты" />
+          <NavigationProperty Name="Статус_рейса" Relationship="KursoviiModel.FK_Рейс_Статус_рейса" FromRole="Рейс" ToRole="Статус_рейса" />
+        </EntityType>
+        <EntityType Name="Самолёты">
+          <Key>
+            <PropertyRef Name="Код_самолёта" />
+          </Key>
+          <Property Name="Код_самолёта" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_самолёта" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Вместительность_людей" Type="Int32" />
+          <NavigationProperty Name="Рейс" Relationship="KursoviiModel.FK_Рейс_Самолёты" FromRole="Самолёты" ToRole="Рейс" />
+        </EntityType>
+        <EntityType Name="Статус_пользователя">
+          <Key>
+            <PropertyRef Name="Код_статуса_пользователя" />
+          </Key>
+          <Property Name="Код_статуса_пользователя" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Пользователи" Relationship="KursoviiModel.FK_Пользователи_Статус_пользователя" FromRole="Статус_пользователя" ToRole="Пользователи" />
+        </EntityType>
+        <EntityType Name="Статус_рейса">
+          <Key>
+            <PropertyRef Name="Код_статуса_рейса" />
+          </Key>
+          <Property Name="Код_статуса_рейса" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Рейс" Relationship="KursoviiModel.FK_Рейс_Статус_рейса" FromRole="Статус_рейса" ToRole="Рейс" />
+        </EntityType>
+        <Association Name="FK_Данные_о_пассажирах_Паспорт_пассажира">
+          <End Type="KursoviiModel.Паспорт_пассажира" Role="Паспорт_пассажира" Multiplicity="0..1" />
+          <End Type="KursoviiModel.Данные_о_пассажирах" Role="Данные_о_пассажирах" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Паспорт_пассажира">
+              <PropertyRef Name="Код_паспорта" />
+            </Principal>
+            <Dependent Role="Данные_о_пассажирах">
+              <PropertyRef Name="Код_пасспорта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Записи_на_рейс_Данные_о_пассажирах">
+          <End Type="KursoviiModel.Данные_о_пассажирах" Role="Данные_о_пассажирах" Multiplicity="0..1" />
+          <End Type="KursoviiModel.Записи_на_рейс" Role="Записи_на_рейс" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Данные_о_пассажирах">
+              <PropertyRef Name="Код_пассажира" />
+            </Principal>
+            <Dependent Role="Записи_на_рейс">
+              <PropertyRef Name="Код_пассажира" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Записи_на_рейс_Рейс">
+          <End Type="KursoviiModel.Рейс" Role="Рейс" Multiplicity="0..1" />
+          <End Type="KursoviiModel.Записи_на_рейс" Role="Записи_на_рейс" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Рейс">
+              <PropertyRef Name="Код_рейса" />
+            </Principal>
+            <Dependent Role="Записи_на_рейс">
+              <PropertyRef Name="Код_рейса" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_История_входа_Пользователи">
+          <End Type="KursoviiModel.Пользователи" Role="Пользователи" Multiplicity="0..1" />
+          <End Type="KursoviiModel.История_входа" Role="История_входа" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="Код_пользователя" />
+            </Principal>
+            <Dependent Role="История_входа">
+              <PropertyRef Name="Код_пользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Пользователи_Статус_пользователя">
+          <End Type="KursoviiModel.Статус_пользователя" Role="Статус_пользователя" Multiplicity="0..1" />
+          <End Type="KursoviiModel.Пользователи" Role="Пользователи" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Статус_пользователя">
+              <PropertyRef Name="Код_статуса_пользователя" />
+            </Principal>
+            <Dependent Role="Пользователи">
+              <PropertyRef Name="Код_статуса_пользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Рейс_Пользователи">
+          <End Type="KursoviiModel.Пользователи" Role="Пользователи" Multiplicity="0..1" />
+          <End Type="KursoviiModel.Рейс" Role="Рейс" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="Код_пользователя" />
+            </Principal>
+            <Dependent Role="Рейс">
+              <PropertyRef Name="Код_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Рейс_Самолёты">
+          <End Type="KursoviiModel.Самолёты" Role="Самолёты" Multiplicity="0..1" />
+          <End Type="KursoviiModel.Рейс" Role="Рейс" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Самолёты">
+              <PropertyRef Name="Код_самолёта" />
+            </Principal>
+            <Dependent Role="Рейс">
+              <PropertyRef Name="Код_самолёта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Рейс_Статус_рейса">
+          <End Type="KursoviiModel.Статус_рейса" Role="Статус_рейса" Multiplicity="0..1" />
+          <End Type="KursoviiModel.Рейс" Role="Рейс" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Статус_рейса">
+              <PropertyRef Name="Код_статуса_рейса" />
+            </Principal>
+            <Dependent Role="Рейс">
+              <PropertyRef Name="Код_статуса_рейса" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище KursoviiModelContainer" CdmEntityContainer="KursoviiEntities">
+          <EntitySetMapping Name="Данные_о_пассажирах">
+            <EntityTypeMapping TypeName="KursoviiModel.Данные_о_пассажирах">
+              <MappingFragment StoreEntitySet="Данные о пассажирах">
+                <ScalarProperty Name="Код_пасспорта" ColumnName="Код пасспорта" />
+                <ScalarProperty Name="Дата_рождения" ColumnName="Дата рождения" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Код_пассажира" ColumnName="Код пассажира" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Записи_на_рейс">
+            <EntityTypeMapping TypeName="KursoviiModel.Записи_на_рейс">
+              <MappingFragment StoreEntitySet="Записи на рейс">
+                <ScalarProperty Name="Дата_записи" ColumnName="Дата записи" />
+                <ScalarProperty Name="Код_пассажира" ColumnName="Код пассажира" />
+                <ScalarProperty Name="Код_рейса" ColumnName="Код рейса" />
+                <ScalarProperty Name="Код_записи" ColumnName="Код записи" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="История_входа">
+            <EntityTypeMapping TypeName="KursoviiModel.История_входа">
+              <MappingFragment StoreEntitySet="История входа">
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Код_пользователя" ColumnName="Код пользователя" />
+                <ScalarProperty Name="Код_входа" ColumnName="Код входа" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Паспорт_пассажира">
+            <EntityTypeMapping TypeName="KursoviiModel.Паспорт_пассажира">
+              <MappingFragment StoreEntitySet="Паспорт пассажира">
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
+                <ScalarProperty Name="Серия" ColumnName="Серия" />
+                <ScalarProperty Name="Код_паспорта" ColumnName="Код паспорта" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Пользователи">
+            <EntityTypeMapping TypeName="KursoviiModel.Пользователи">
+              <MappingFragment StoreEntitySet="Пользователи">
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Код_статуса_пользователя" ColumnName="Код статуса пользователя" />
+                <ScalarProperty Name="Электронная_почта" ColumnName="Электронная почта" />
+                <ScalarProperty Name="Номер_телефона" ColumnName="Номер телефона" />
+                <ScalarProperty Name="Дата_рождения" ColumnName="Дата рождения" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Код_пользователя" ColumnName="Код пользователя" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Рейс">
+            <EntityTypeMapping TypeName="KursoviiModel.Рейс">
+              <MappingFragment StoreEntitySet="Рейс">
+                <ScalarProperty Name="Код_сотрудника" ColumnName="Код сотрудника" />
+                <ScalarProperty Name="Код_статуса_рейса" ColumnName="Код статуса рейса" />
+                <ScalarProperty Name="Город_прибытия" ColumnName="Город прибытия" />
+                <ScalarProperty Name="Город_отправки" ColumnName="Город отправки" />
+                <ScalarProperty Name="Код_самолёта" ColumnName="Код самолёта" />
+                <ScalarProperty Name="Дата_полёта" ColumnName="Дата полёта" />
+                <ScalarProperty Name="Код_рейса" ColumnName="Код рейса" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Самолёты">
+            <EntityTypeMapping TypeName="KursoviiModel.Самолёты">
+              <MappingFragment StoreEntitySet="Самолёты">
+                <ScalarProperty Name="Вместительность_людей" ColumnName="Вместительность людей" />
+                <ScalarProperty Name="Название_самолёта" ColumnName="Название самолёта" />
+                <ScalarProperty Name="Код_самолёта" ColumnName="Код самолёта" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Статус_пользователя">
+            <EntityTypeMapping TypeName="KursoviiModel.Статус_пользователя">
+              <MappingFragment StoreEntitySet="Статус пользователя">
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Код_статуса_пользователя" ColumnName="Код статуса пользователя" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Статус_рейса">
+            <EntityTypeMapping TypeName="KursoviiModel.Статус_рейса">
+              <MappingFragment StoreEntitySet="Статус рейса">
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Код_статуса_рейса" ColumnName="Код статуса рейса" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

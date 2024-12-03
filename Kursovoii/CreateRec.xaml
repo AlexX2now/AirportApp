@@ -1,0 +1,49 @@
+﻿<Window x:Class="Kursovoii.CreateRec"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursovoii"
+        mc:Ignorable="d"
+        Title="Создание записи" Height="450" Width="600" Icon="/jTx69nkrc.png">
+    <Grid>
+        <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="Создание записи" VerticalAlignment="Top" FontSize="35" FontFamily="Bahnschrift SemiLight" Height="40" Width="291" TextAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,57,0,0" TextWrapping="Wrap" Text="Необходимо заполнить все поля" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Height="40" Width="318" TextAlignment="Center"/>
+        <TextBox x:Name="surname" HorizontalAlignment="Left" Margin="40,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="20" FontFamily="Bahnschrift SemiLight" BorderBrush="Black"/>
+        <TextBlock HorizontalAlignment="Left" Margin="40,102,0,0" TextWrapping="Wrap" Text="Фамилия" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Height="23" Width="150" TextAlignment="Center"/>
+        <TextBox x:Name="name" HorizontalAlignment="Center" Margin="0,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="20" FontFamily="Bahnschrift SemiLight" BorderBrush="Black"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,102,0,0" TextWrapping="Wrap" Text="Имя" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Height="23" Width="150" TextAlignment="Center"/>
+        <TextBox x:Name="trim" Margin="410,125,40,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" BorderBrush="Black"/>
+        <TextBlock HorizontalAlignment="Left" Margin="410,102,0,0" TextWrapping="Wrap" Text="Отчество" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Height="23" Width="150" TextAlignment="Center"/>
+        <TextBox x:Name="numpas" HorizontalAlignment="Center" Margin="0,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="20" FontFamily="Bahnschrift SemiLight" BorderBrush="Black" MaxLength="6"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,193,0,0" TextWrapping="Wrap" Text="Номер паспорта" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Height="23" Width="150" TextAlignment="Center"/>
+        <TextBox x:Name="serpas" Margin="410,216,40,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" BorderBrush="Black" MaxLength="4"/>
+        <TextBlock HorizontalAlignment="Left" Margin="410,193,0,0" TextWrapping="Wrap" Text="Серия паспорта" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Height="23" Width="150" TextAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Left" Margin="40,193,0,0" TextWrapping="Wrap" Text="Дата рождения" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Height="23" Width="150" TextAlignment="Center"/>
+        <DatePicker x:Name="dateborn" HorizontalAlignment="Left" Margin="40,216,0,0" FontFamily="Bahnschrift SemiLight" VerticalAlignment="Top" Width="150" Height="26" DisplayDateEnd="2017-05-05" BorderBrush="Black"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,270,0,0" TextWrapping="Wrap" Text="Выбор нужного рейса" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift SemiLight" Height="23" Width="220" TextAlignment="Center"/>
+        <ComboBox x:Name="flightcombo" Margin="150,299,150,0" FontSize="20" FontFamily="Bahnschrift SemiLight" BorderBrush="Black" Background="Black" Height="26" VerticalAlignment="Top"/>
+        <Button x:Name="createbtn" Content="Создать запись" HorizontalAlignment="Center" Margin="0,373,0,0" VerticalAlignment="Top" BorderBrush="Black" Background="White" FontFamily="Bahnschrift SemiLight" FontSize="25" Width="220" Click="createbtn_Click"/>
+        <Rectangle HorizontalAlignment="Left" Height="774" Margin="140,-369,0,0" Stroke="White" VerticalAlignment="Top" Width="197" Panel.ZIndex="-2" Fill="#FF5FE8E5" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="71.645"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+
+        <Rectangle Margin="266,-17,39,-449" Stroke="White" Panel.ZIndex="-2" Fill="#FF5FE8E5" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="71.645"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+    </Grid>
+</Window>

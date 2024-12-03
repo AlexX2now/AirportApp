@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ead562a15be44c3e9c0f2f776b61ddcd" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="KursoviiModel.Данные_о_пассажирах" Width="1.5" PointX="5.25" PointY="11" />
+        <EntityTypeShape EntityType="KursoviiModel.Записи_на_рейс" Width="1.5" PointX="7.5" PointY="4.25" />
+        <EntityTypeShape EntityType="KursoviiModel.История_входа" Width="1.5" PointX="5.25" PointY="8.25" />
+        <EntityTypeShape EntityType="KursoviiModel.Паспорт_пассажира" Width="1.5" PointX="3" PointY="11.375" />
+        <EntityTypeShape EntityType="KursoviiModel.Пользователи" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="KursoviiModel.Рейс" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="KursoviiModel.Самолёты" Width="1.5" PointX="3" PointY="8.25" />
+        <EntityTypeShape EntityType="KursoviiModel.Статус_пользователя" Width="1.5" PointX="0.75" PointY="4.5" />
+        <EntityTypeShape EntityType="KursoviiModel.Статус_рейса" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="KursoviiModel.FK_Данные_о_пассажирах_Паспорт_пассажира" />
+        <AssociationConnector Association="KursoviiModel.FK_Записи_на_рейс_Данные_о_пассажирах" />
+        <AssociationConnector Association="KursoviiModel.FK_Записи_на_рейс_Рейс" />
+        <AssociationConnector Association="KursoviiModel.FK_История_входа_Пользователи" />
+        <AssociationConnector Association="KursoviiModel.FK_Пользователи_Статус_пользователя" />
+        <AssociationConnector Association="KursoviiModel.FK_Рейс_Пользователи" />
+        <AssociationConnector Association="KursoviiModel.FK_Рейс_Самолёты" />
+        <AssociationConnector Association="KursoviiModel.FK_Рейс_Статус_рейса" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

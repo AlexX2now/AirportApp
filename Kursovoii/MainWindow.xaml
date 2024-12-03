@@ -1,0 +1,53 @@
+﻿<Window x:Class="Kursovoii.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursovoii"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="470" Width="400" Icon="/jTx69nkrc.png">
+    <Grid>
+        <Image HorizontalAlignment="Left" Height="60" Margin="33,29,0,0" VerticalAlignment="Top" Width="84" Source="/jTx69nkrc.png" Stretch="Fill"/>
+        <TextBlock HorizontalAlignment="Left" Margin="146,35,0,0" TextWrapping="Wrap" Text="SkyGate" VerticalAlignment="Top" FontSize="40" FontFamily="Bahnschrift SemiLight"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,121,0,0" TextWrapping="Wrap" Text="Логин" VerticalAlignment="Top" FontSize="25" FontFamily="Bahnschrift SemiLight"/>
+        <TextBlock HorizontalAlignment="Left" Margin="151,209,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" FontSize="25" FontFamily="Bahnschrift SemiLight"/>
+        <TextBox x:Name="loginin" HorizontalAlignment="Center" Margin="0,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" FontSize="25" FontFamily="Bahnschrift SemiLight" SelectionBrush="White" BorderBrush="Black" Text="admin">
+
+        </TextBox>
+        <TextBox x:Name="passin" HorizontalAlignment="Center" Margin="0,244,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" FontSize="25" FontFamily="Bahnschrift SemiLight" BorderBrush="Black" Text="admin"/>
+        <Button x:Name="entermain" Content="Войти" HorizontalAlignment="Center" Margin="0,318,0,0" VerticalAlignment="Top" FontSize="25" FontFamily="Bahnschrift SemiLight" Width="250" Height="36" BorderBrush="Black" Background="White" Click="entermain_Click" Focusable="False">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Red"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button x:Name="enterpass" Content="Войти как пассажир" HorizontalAlignment="Center" Margin="0,359,0,0" VerticalAlignment="Top" FontSize="25" FontFamily="Bahnschrift SemiLight" Width="250" Height="36" Background="{x:Null}" BorderBrush="{x:Null}" Click="enterpass_Click" Focusable="False"/>
+
+        <Rectangle HorizontalAlignment="Left" Height="774" Margin="88,-419,0,0" Stroke="White" VerticalAlignment="Top" Width="190" Panel.ZIndex="-2" Fill="#FF5FE8E5" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="71.645"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+
+        <Rectangle Margin="258,42,-82,-363" Stroke="White" Panel.ZIndex="-2" Fill="#FF5FE8E5" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="71.645"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+    </Grid>
+</Window>
